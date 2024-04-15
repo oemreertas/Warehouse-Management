@@ -15,8 +15,7 @@ def create_button(parent, text, command, x, y, img=None):
     button.bind("<Leave>",
                 lambda event: button.after(170, lambda: button.configure(bg="#1c6071", fg="Silver", font=("Arial", 13, "bold"),
                                                                          takefocus=False, bd=0, cursor="hand2",
-                                                                         activebackground="#1c6071",
-                                                                         activeforeground="gray")))
+                                                                         activebackground="#1c6071")))
     return button
 
 
@@ -27,7 +26,9 @@ def create_label(parent, x, y, text, foreground):
     return label
 
 
-class Dashboard(tk.Tk):
+
+
+class Main(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Warehouse Management")
@@ -51,9 +52,11 @@ class Dashboard(tk.Tk):
 
         }
 
-        self.create_sidebar()
+        self.Sidebar()
+        self.Dashboard()
 
-    def create_sidebar(self):
+
+    def Sidebar(self):
         sidebar_frame = tk.Frame(self, bg="#1c6071", width=240, height=768)
         sidebar_frame.pack(side="left")
 
@@ -72,11 +75,17 @@ class Dashboard(tk.Tk):
         create_button(sidebar_frame, img=self.images["main"], x=5, y=5, text="", command="").configure(cursor="",
                                                                                                        takefocus=False)
         create_label(sidebar_frame, x=100, y=13, text="WareHouse\nManagement", foreground="pink")
+        create_label(sidebar_frame, x=100 , y=60, text="Version 1.00", foreground="silver").configure(font=("arial", 8))
+
+    def Dashboard(self):
+        dashboard_frame = tk.Frame(self, background="#fffafa", width=1126, height=768)
+        dashboard_frame.pack(side="right")
+
+        label1 = tk.Label(dashboard_frame, width=10, height=5, background="red", borderwidth=4).place(x= 150, y= 150)
 
     def do_nothing(self):
         pass
 
-
 if __name__ == '__main__':
-    app = Dashboard()
+    app = Main()
     app.mainloop()
